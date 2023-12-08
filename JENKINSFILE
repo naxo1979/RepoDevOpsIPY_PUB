@@ -1,6 +1,6 @@
 pipeline {
-
-     stages {
+agent any
+stages {
         stage('Get Code') {
 			agent { label ‘SCM’ }
             steps {
