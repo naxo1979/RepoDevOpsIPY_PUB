@@ -6,7 +6,7 @@ stages {
 		agent { label 'SecundarioA' }
         	steps {
                		// Obtener código del repo
-			whoami
+			bat 'whoami'
                 	git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
 			stash includes: '/app/**', name: 'app'
 			stash includes: '/test/**', name: 'test'
@@ -15,7 +15,7 @@ stages {
         stage('Build') {
 		agent { label 'SecundarioB' }
 		steps {
-			whoami
+			bat 'whoami'
               		echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
 	          	echo WORKSPACE
               		bat 'dir'
