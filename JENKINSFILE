@@ -1,8 +1,7 @@
 pipeline {
-agent none
+agent { label ‘SCM’ }
 stages {
         stage('Get Code') {
-	agent { label ‘SCM’ }
             steps {
                 // Obtener código del repo
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
