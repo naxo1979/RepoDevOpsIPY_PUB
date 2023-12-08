@@ -1,9 +1,9 @@
 
 pipeline {
-agent { label 'SecundarioA' }
+
 stages {
         stage('Get Code') {
-		
+	    agent { label 'SecundarioA' }
             steps {
                 // Obtener código del repo
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
