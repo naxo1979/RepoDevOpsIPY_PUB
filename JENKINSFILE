@@ -1,5 +1,5 @@
 pipeline {
-agent SCM
+agent { label ‘SCM’ }
 stages {
         stage('Get Code') {
 			agent { label ‘SCM’ }
