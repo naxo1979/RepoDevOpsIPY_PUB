@@ -11,3 +11,5 @@ pipeline {
 				stash includes: ‘/test/**’, name: ‘test’
             }
         }
+}
+}
