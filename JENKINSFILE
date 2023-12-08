@@ -6,7 +6,7 @@ stages {
             steps {
                 // Obtener código del repo
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
-		bat 'WORKSPACE'
+		
             }
         }
 }
