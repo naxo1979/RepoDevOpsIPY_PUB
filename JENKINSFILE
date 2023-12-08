@@ -51,7 +51,13 @@ pipeline {
             }
         }
      
+		stage('Deploy') {
 	
+			steps{
+				echo 'Etapa simulada de deploy en Master!!!'
+			}
+			
+		}	
 	 
     }
 }
