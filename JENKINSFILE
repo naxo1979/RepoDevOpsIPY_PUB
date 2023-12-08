@@ -2,7 +2,7 @@ pipeline {
 agent any
 stages {
         stage('Get Code') {
-	agent { label ‘Build’ }
+	agent { label ‘windows’ }
             steps {
                 // Obtener código del repo
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
