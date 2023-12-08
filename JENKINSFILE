@@ -29,6 +29,7 @@ pipeline {
 					}
 				}   
 
+
 				stage('Rest') {
 					steps {
 						bat '''
@@ -43,19 +44,24 @@ pipeline {
 				}
 			}
 		}
+
         stage('Results') {
             steps {
                 junit 'result*.xml' 
             }
         }
      
-		stage('Deploy') {
 	
-			steps{
-				echo 'Etapa simulada de deploy en Master!!!'
-			}
-			}
-		}	
 	 
     }
 }
+
+
+
+
+
+		 
+		   
+		  
+			
+			
