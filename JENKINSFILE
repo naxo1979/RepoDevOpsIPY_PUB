@@ -3,7 +3,7 @@ pipeline {
 
      stages {
         stage('Get Code') {
-			agent { label ‘Agent SCM’ }
+			agent { label ‘SCM’ }
             steps {
                 // Obtener código del repo
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
@@ -11,7 +11,7 @@ pipeline {
         }
     
         stage('Build') {
-			agent { label ‘Agent Build’ }
+			agent { label ‘Build’ }
 			steps {
               echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
 	          echo WORKSPACE
@@ -19,7 +19,7 @@ pipeline {
            }
         }
 		stage('Tests') {
-			agent { label ‘Agent Tests’ }
+			agent { label ‘Tests’ }
 			parallel {
 				stage('Unit') {
 					steps {
@@ -49,14 +49,14 @@ pipeline {
 		}
 
         stage('Results') {
-			agent { label ‘Agent Result’ }		
+			agent { label ‘Result’ }		
             steps {
                 junit 'result*.xml' 
             }
         }
      
 		stage('Deploy') {
-			agent { label ‘Agent Deploy’ }
+			agent { label ‘Deploy’ }
 			steps{
 				echo 'Etapa simulada de deploy en Master!!!'
 			}
