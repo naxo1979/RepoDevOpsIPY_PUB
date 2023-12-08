@@ -19,9 +19,10 @@ pipeline {
            }
         }
 		stage('Tests') {
-			agent { label ‘Tests’ }
+
 			parallel {
 				stage('Unit') {
+				agent { label ‘Tests’ }
 					steps {
 						catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
 							bat '''
@@ -34,6 +35,7 @@ pipeline {
 
 
 				stage('Rest') {
+				agent { label ‘Tests’ }
 					steps {
 						bat '''
 							set FLASK_APP=app\\api.py
