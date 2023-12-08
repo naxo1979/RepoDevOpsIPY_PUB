@@ -7,8 +7,7 @@ pipeline {
             steps {
                 // Obtener código del repo
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
-				stash includes: ‘/app/**’, name: ‘app’
-				stash includes: ‘/test/**’, name: ‘test’
+
             }
         }
 }
