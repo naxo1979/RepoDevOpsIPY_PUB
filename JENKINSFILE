@@ -49,5 +49,16 @@ pipeline {
             }
         }
      
+		stage('Deploy') {
+            when {
+                branch 'master'
+            }			
+			agent { label 'VPN-server-agent' }
+			steps{
+				echo 'Etapa simulada de deploy en Master!!!'
+			}
+			}
+		}	
+	 
     }
 }
