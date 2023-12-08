@@ -3,13 +3,21 @@ pipeline {
 agent any
 stages {
         stage('Get Code') {
-	    agent { label 'SecundarioA' }
-            steps {
-                // Obtener código del repo
-                git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
-		stash includes: '/app/**', name: 'app'
-		stash includes: '/test/**', name: 'test'
-            }
+		agent { label 'SecundarioA' }
+        	steps {
+               		// Obtener código del repo
+                	git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
+			stash includes: '/app/**', name: 'app'
+			stash includes: '/test/**', name: 'test'
+            	}
+        }
+        stage('Build') {
+		agent any
+		steps {
+              		echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
+	          	echo WORKSPACE
+              		bat 'dir'
+           }
         }
 }
 }
