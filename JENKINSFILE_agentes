@@ -1,6 +1,6 @@
 
 pipeline {
-agent { label ‘SecundarioA’ }
+agent { label 'SecundarioA' }
 stages {
         stage('Get Code') {
 		
