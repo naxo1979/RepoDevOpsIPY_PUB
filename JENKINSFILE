@@ -2,7 +2,7 @@ pipeline {
 agent any
 stages {
         stage('Get Code') {
-	#agent { label ‘SCM’ }
+	
             steps {
                 // Obtener código del repo
 		echo WORKSPACE
