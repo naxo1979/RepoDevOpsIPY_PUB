@@ -52,9 +52,7 @@ pipeline {
         }
      
 		stage('Deploy') {
-            when {
-                branch 'master'
-            }	
+            when {branch 'master'}	
 			steps{
 				echo 'Etapa simulada de deploy en Master!!!'
 			}
@@ -63,3 +61,13 @@ pipeline {
 	 
     }
 }
+
+
+
+
+
+		 
+		   
+		  
+			
+			
