@@ -5,8 +5,6 @@ stages {
 	
             steps {
                 // Obtener código del repo
-		echo WORKSPACE
-		echo whoami
                 git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
 
             }
