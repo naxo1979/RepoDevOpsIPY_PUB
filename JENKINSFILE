@@ -55,7 +55,6 @@ pipeline {
         }
 		
 		stage('Deploy') {
-			agent { label ‘Deploy’ }
 			steps{
 				echo 'Etapa simulada de deploy en Master!!!'
 			}
