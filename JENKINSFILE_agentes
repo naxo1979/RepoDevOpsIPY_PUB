@@ -3,7 +3,7 @@ pipeline {
 agent any
 stages {
         stage('Get Code') {
-		agent { label 'SecundarioA' }
+		
         	steps {
                		// Obtener código del repo
 			bat 'whoami'
@@ -13,7 +13,7 @@ stages {
             	}
         }
         stage('Build') {
-		agent { label 'SecundarioB' }
+		
 		steps {
 			bat 'whoami'
               		echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
