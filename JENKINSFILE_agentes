@@ -1,8 +1,7 @@
 
 pipeline {
 agent { label 'Principal' }
-
-
+stages {
 		stage('SCM') {
 			parallel {
 
@@ -39,6 +38,7 @@ agent { label 'Principal' }
 				stage('Unit') {
 					agent { label 'SecundarioA' }
 						steps {
+						unstash name: 'test'
 						catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
 						bat '''
 							set PYTHONPATH=%WORKSPACE%
@@ -52,6 +52,8 @@ agent { label 'Principal' }
 				stage('Service') {
 					agent { label 'SecundarioB' }
 						steps {
+						    unstash name: 'app'
+							unstash name: 'test'
 							bat '''
 							set FLASK_APP=app\\api.py
 							set FLASK_ENV=development
@@ -80,3 +82,4 @@ agent { label 'Principal' }
 			
 		}
 	}
+}
