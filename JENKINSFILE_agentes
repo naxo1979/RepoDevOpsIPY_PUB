@@ -12,6 +12,7 @@ stages {
 			stash includes: '/test/**', name: 'test'
             	}
         }
+
         stage('Build') {
 		agent { label 'SecundarioB' }
 		steps {
@@ -20,6 +21,18 @@ stages {
 	          	echo WORKSPACE
               		bat 'dir'
            }
+        }
+
+        stage('Unit') {
+		agent { label 'SecundarioA' }
+            	steps {
+                	catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    	bat '''
+                        set PYTHONPATH=%WORKSPACE%
+                        pytest --junitxml=result-unit.xml test\\unit
+	                '''
+               }
+            }
         }
 }
 }
