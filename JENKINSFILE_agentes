@@ -15,7 +15,7 @@ stages {
 			stash includes: '/test/**', name: 'test'
 					}
 				}
-			}
+			
 				stage('Build') {
 				agent { label 'SecundarioB' }
 					steps {
@@ -25,10 +25,10 @@ stages {
 					echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
 					echo WORKSPACE
               		bat 'dir'
+					}
 				}
 			}
 		}
-		
 	
 		
  		stage('Tests') {
