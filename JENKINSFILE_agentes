@@ -20,8 +20,6 @@ stages {
 				agent { label 'SecundarioB' }
 					steps {
 					bat 'whoami'
-              		unstash name: 'app'
-					unstash name: 'test'
 					echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
 					echo WORKSPACE
               		bat 'dir'
