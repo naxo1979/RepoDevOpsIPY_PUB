@@ -30,6 +30,7 @@ agent { label 'Principal' }
 				}
 			}
 		}
+	}
 		
  		stage('Tests') {
 		
@@ -78,5 +79,5 @@ agent { label 'Principal' }
 			}
 			
 		}
+	}
 }
-
