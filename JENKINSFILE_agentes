@@ -3,7 +3,7 @@ pipeline {
 agent any
 stages {
         stage('Get Code') {
-		
+		agent { label 'SecundarioA' }
         	steps {
                		// Obtener código del repo
 			bat 'whoami'
