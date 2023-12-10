@@ -1,0 +1,87 @@
+
+pipeline {
+agent { label 'Principal' }
+stages {
+		stage('SCM') {
+			parallel {
+
+				stage('Get Code') {
+				agent { label 'SecundarioA' }
+					steps {
+               		// Obtener código del repo
+					bat 'whoami'
+                	git 'https://github.com/naxo1979/RepoDevOpsIPY_PUB'
+			stash includes: '/app/**', name: 'app'
+			stash includes: '/test/**', name: 'test'
+					}
+				}
+			
+				stage('Build') {
+				agent { label 'SecundarioB' }
+					steps {
+					bat 'whoami'
+					echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
+					echo WORKSPACE
+              		bat 'dir'
+					}
+				}
+			}
+		}
+	
+		
+ 		stage('Tests') {
+		
+			parallel {
+			
+				stage('Unit') {
+					agent { label 'SecundarioA' }
+						steps {
+						bat 'whoami'
+						unstash name: 'test'
+						catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+						bat '''
+							set PYTHONPATH=%WORKSPACE%
+							pytest --junitxml=result-unit.xml test\\unit
+						'''
+					}
+				}
+			}   
+
+
+				stage('Service') {
+					agent { label 'SecundarioB' }
+						steps {
+						    unstash name: 'app'
+							unstash name: 'test'
+							bat 'whoami'
+							bat '''
+							set FLASK_APP=app\\api.py
+							set FLASK_ENV=development
+							start flask run
+							start java -jar C:\\DevOps\\Jenkins\\root\\workspace\\wiremock-standalone-3.3.1.jar --port 9090 --root-dir C:\\DevOps\\Jenkins\\root\\workspace
+							set PYTHONPATH=%WORKSPACE%
+							pytest --junitxml=result-rest.xml test\\rest
+							'''	
+					}    
+				}	
+			}
+		}
+		
+		 stage('Results') {
+			agent { label 'SecundarioA' }
+				steps {
+					bat 'whoami'
+					junit 'result*.xml' 
+				}
+			}
+		
+		stage('Deploy') {
+			agent { label 'SecundarioB' }
+				steps{
+					bat 'whoami'
+					echo 'Etapa simulada de deploy en Master!!!'
+			}
+			
+		}
+	}
+}
