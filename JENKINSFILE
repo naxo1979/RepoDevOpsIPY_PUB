@@ -17,13 +17,9 @@ pipeline {
            }
         }
         
-		stage('Tests') {
-		
-			parallel {
-			
-				stage('Unit') {
-					steps {
-					catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+        stage('Unit') {
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     bat '''
                         set PYTHONPATH=%WORKSPACE%
                         pytest --junitxml=result-unit.xml test\\unit
@@ -33,33 +29,24 @@ pipeline {
         }   
 
 
-				stage('Service') {
-					steps {
-						bat '''
-						set FLASK_APP=app\\api.py
-						set FLASK_ENV=development
-						start flask run
-						start java -jar C:\\DevOps\\Jenkins\\root\\workspace\\wiremock-standalone-3.3.1.jar --port 9090 --root-dir C:\\DevOps\\Jenkins\\root\\workspace
-						set PYTHONPATH=%WORKSPACE%
-						pytest --junitxml=result-rest.xml test\\rest
-						'''
-					}    
-				}	
-			}
-		}
+        stage('Rest') {
+            steps {
+                bat '''
+                    set FLASK_APP=app\\api.py
+                    set FLASK_ENV=feature_fix_racecond
+                    start flask run
+                    start java -jar C:\\DevOps\\Jenkins\\root\\workspace\\wiremock-standalone-3.3.1.jar --port 9090 --root-dir C:\\DevOps\\Jenkins\\root\\workspace
+                    set PYTHONPATH=%WORKSPACE%
+                    pytest --junitxml=result-rest.xml test\\rest
+                '''
+            }    
+        }
 
         stage('Results') {
             steps {
                 junit 'result*.xml' 
             }
         }
-		
-		stage('Deploy') {
-			steps{
-				echo 'Etapa simulada de deploy en Master!!!'
-			}
-			
-		}
      
     }
 }
