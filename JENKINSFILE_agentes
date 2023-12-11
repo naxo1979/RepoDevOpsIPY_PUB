@@ -65,20 +65,27 @@ stages {
 				}	
 			}
 		}
+ 		stage('Staging') {
+
+			parallel {
 		
-		 stage('Results') {
-			agent { label 'SecundarioA' }
-				steps {
-					bat 'whoami'
-					junit 'result*.xml' 
-				}
-			}
-		
-		stage('Deploy') {
-			agent { label 'SecundarioB' }
-				steps{
-					bat 'whoami'
-					echo 'Etapa simulada de deploy en Master!!!'
+				stage('Results') {
+					agent { label 'SecundarioA' }
+						steps {
+							bat 'whoami'
+							junit 'result*.xml' 
+						}
+					}
+				
+				
+				
+				stage('Deploy') {
+					agent { label 'SecundarioB' }
+						steps{
+							bat 'whoami'
+							echo 'Etapa simulada de deploy en Master!!!'
+						}	
+					}		
 			}
 			
 		}
