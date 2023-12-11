@@ -51,6 +51,11 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(0, self.calc.multiply(1, 0))
         self.assertEqual(0, self.calc.multiply(-1, 0))
         self.assertEqual(-2, self.calc.multiply(-1, 2))
+        self.assertEqual(6 , self.calc.multiply(3, 2))
+        self.assertEqual(8 , self.calc.multiply(4, 2))
+        self.assertEqual(10 , self.calc.multiply(5, 2))
+        self.assertEqual(12 , self.calc.multiply(6, 2))
+        self.assertEqual(14 , self.calc.multiply(7, 2))
         self.assertRaises(TypeError, self.calc.multiply, "0", 0)
         
     def test_power_method_returns_correct_result(self):
