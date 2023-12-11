@@ -19,7 +19,7 @@ pipeline {
         
         stage('Unit') {
             steps {
-		setdefault('timeout', 20)
+		timeout(20)
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     bat '''
                         set PYTHONPATH=%WORKSPACE%
