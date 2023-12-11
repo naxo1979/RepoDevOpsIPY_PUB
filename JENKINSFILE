@@ -1,6 +1,6 @@
 pipeline {
     agent any
-     branches: [[name: '*/master']]
+     branch: [[name: '*/develop']]
      stages {
         stage('Get Code') {
             steps {
