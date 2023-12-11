@@ -51,8 +51,7 @@ stages {
 				stage('Service') {
 					agent { label 'SecundarioB' }
 						steps {
-						    unstash name: 'app'
-							unstash name: 'test'
+						    	unstash name: 'app'
 							bat 'whoami'
 							bat '''
 							set FLASK_APP=app\\api.py
